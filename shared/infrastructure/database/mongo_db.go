@@ -5,14 +5,15 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
+	"mongodb-trx/shared/infrastructure/config"
 )
 
-func NewMongoDefault() *mongo.Client {
+func NewMongoDefault(cfg config.Config) *mongo.Client {
 
 	// TODO fill this URI later
-	uri := "mongodb://localhost:27017/?replicaSet=rs0&readPreference=primary&ssl=false"
+	//uri := "mongodb://localhost:27017/?replicaSet=rs0&readPreference=primary&ssl=false"
 
-	client, err := mongo.NewClient(options.Client().ApplyURI(uri))
+	client, err := mongo.NewClient(options.Client().ApplyURI(cfg.Database.URI))
 
 	err = client.Connect(context.Background())
 	if err != nil {
