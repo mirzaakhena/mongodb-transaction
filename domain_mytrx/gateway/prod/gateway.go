@@ -84,6 +84,8 @@ func (r *gateway) SaveOrder(ctx context.Context, obj *entity.Order) error {
 	r.log.Info(ctx, "Order %v Inserted", res.InsertedID)
 
 	return nil
+
+	//return fmt.Errorf("Error spot for SaveOrder")
 }
 
 func (r *gateway) SavePerson(ctx context.Context, obj *entity.Person) error {
@@ -100,4 +102,6 @@ func (r *gateway) SavePerson(ctx context.Context, obj *entity.Person) error {
 	r.log.Info(ctx, "Person %v Inserted", res.InsertedID)
 
 	return nil
+
+	//return fmt.Errorf("Error spot for SavePerson")
 }

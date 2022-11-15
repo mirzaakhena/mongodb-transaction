@@ -18,4 +18,6 @@ func NewPerson(nama string, umur int) (*Person, error) {
 		Umur: umur,
 	}, nil
 
+	//return nil, fmt.Errorf("Error spot for NewPerson")
+
 }
