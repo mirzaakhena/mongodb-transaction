@@ -2,18 +2,18 @@ package server
 
 import (
 	"fmt"
+	"mongodb-trx/shared/gogen"
 	"net/http"
 	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 
-	"mongodb-trx/shared/driver"
 	"mongodb-trx/shared/infrastructure/config"
 	"mongodb-trx/shared/infrastructure/logger"
 )
 
-func NewGinHTTPHandlerDefault(log logger.Logger, appData driver.ApplicationData, cfg *config.Config) GinHTTPHandler {
+func NewGinHTTPHandlerDefault(log logger.Logger, appData gogen.ApplicationData, cfg *config.Config) GinHTTPHandler {
 	return NewGinHTTPHandler(log, fmt.Sprintf(":%d", cfg.Server.Port), appData)
 }
 
@@ -23,7 +23,7 @@ type GinHTTPHandler struct {
 	Router *gin.Engine
 }
 
-func NewGinHTTPHandler(log logger.Logger, address string, appData driver.ApplicationData) GinHTTPHandler {
+func NewGinHTTPHandler(log logger.Logger, address string, appData gogen.ApplicationData) GinHTTPHandler {
 
 	router := gin.Default()
 

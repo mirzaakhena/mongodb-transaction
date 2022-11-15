@@ -13,6 +13,8 @@ type Inport interface {
 
 // InportRequest is request payload to run the usecase
 type InportRequest struct {
+	RandomIDForPerson string
+	RandomIDForOrder  string
 }
 
 // InportResponse is response payload after running the usecase

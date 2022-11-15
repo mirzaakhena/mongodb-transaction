@@ -2,18 +2,22 @@ package restapi
 
 import (
 	"context"
+	"mongodb-trx/domain_mytrx/usecase/createorder"
+	"mongodb-trx/shared/gogen"
+	"mongodb-trx/shared/infrastructure/logger"
+	"mongodb-trx/shared/model/payload"
+	"mongodb-trx/shared/util"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-
-	"mongodb-trx/domain_mytrx/usecase/createorder"
-	"mongodb-trx/shared/infrastructure/logger"
-	"mongodb-trx/shared/infrastructure/util"
-	"mongodb-trx/shared/model/payload"
 )
 
-// createOrderHandler ...
-func (r *Controller) createOrderHandler(inputPort createorder.Inport) gin.HandlerFunc {
+func (r *ginController) createOrderHandler() gin.HandlerFunc {
+
+	type InportRequest = createorder.InportRequest
+	type InportResponse = createorder.InportResponse
+
+	inport := gogen.GetInport[InportRequest, InportResponse](r.GetUsecase(InportRequest{}))
 
 	type request struct {
 	}
@@ -29,18 +33,20 @@ func (r *Controller) createOrderHandler(inputPort createorder.Inport) gin.Handle
 
 		//var jsonReq request
 		//if err := c.BindJSON(&jsonReq); err != nil {
-		//	r.Log.Error(ctx, err.Error())
+		//	r.log.Error(ctx, err.Error())
 		//	c.JSON(http.StatusBadRequest, payload.NewErrorResponse(err, traceID))
 		//	return
 		//}
 
-		var req createorder.InportRequest
+		var req InportRequest
+		req.RandomIDForOrder = util.GenerateID(16)
+		req.RandomIDForPerson = util.GenerateID(16)
 
-		r.Log.Info(ctx, util.MustJSON(req))
+		r.log.Info(ctx, util.MustJSON(req))
 
-		res, err := inputPort.Execute(ctx, req)
+		res, err := inport.Execute(ctx, req)
 		if err != nil {
-			r.Log.Error(ctx, err.Error())
+			r.log.Error(ctx, err.Error())
 			c.JSON(http.StatusBadRequest, payload.NewErrorResponse(err, traceID))
 			return
 		}
@@ -48,7 +54,7 @@ func (r *Controller) createOrderHandler(inputPort createorder.Inport) gin.Handle
 		var jsonRes response
 		_ = res
 
-		r.Log.Info(ctx, util.MustJSON(jsonRes))
+		r.log.Info(ctx, util.MustJSON(jsonRes))
 		c.JSON(http.StatusOK, payload.NewSuccessResponse(jsonRes, traceID))
 
 	}

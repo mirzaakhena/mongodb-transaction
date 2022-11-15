@@ -3,11 +3,11 @@ package logger
 import (
 	"context"
 	"fmt"
-	"mongodb-trx/shared/driver"
+	"mongodb-trx/shared/gogen"
 	"time"
 )
 
-func NewSimpleJSONLogger(appData driver.ApplicationData) Logger {
+func NewSimpleJSONLogger(appData gogen.ApplicationData) Logger {
 	return &simpleJSONLoggerImpl{AppData: appData}
 }
 
@@ -47,7 +47,7 @@ func newJSONLogModel(lg *simpleJSONLoggerImpl, flag, loc string, msg, trid inter
 }
 
 type simpleJSONLoggerImpl struct {
-	AppData driver.ApplicationData
+	AppData gogen.ApplicationData
 }
 
 func (l simpleJSONLoggerImpl) Info(ctx context.Context, message string, args ...interface{}) {

@@ -3,19 +3,21 @@ package entity
 import "fmt"
 
 type Person struct {
-	Nama string
-	Umur int
+	ID   string `bson:"_id"`
+	Name string
+	Age  int
 }
 
-func NewPerson(nama string, umur int) (*Person, error) {
+func NewPerson(id, name string, age int) (*Person, error) {
 
-	if umur <= 0 {
+	if age <= 0 {
 		return nil, fmt.Errorf("umur gak boleh 0 atau dibawah nol")
 	}
 
 	//return &Person{
-	//	Nama: nama,
-	//	Umur: umur,
+	//	ID:   id,
+	//	Name: name,
+	//	Age:  age,
 	//}, nil
 
 	return nil, fmt.Errorf("Error spot for NewPerson")

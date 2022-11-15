@@ -1,11 +1,9 @@
 package payload
 
-import (
-	"mongodb-trx/shared/driver"
-)
+import "mongodb-trx/shared/gogen"
 
 type Payload struct {
-	Data      interface{}            `json:"data"`
-	Publisher driver.ApplicationData `json:"publisher"`
-	TraceID   string                 `json:"traceId"`
+	Data      interface{}           `json:"data"`
+	Publisher gogen.ApplicationData `json:"publisher"`
+	TraceID   string                `json:"traceId"`
 }

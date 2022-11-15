@@ -1,4 +1,4 @@
-package prod
+package withmongodb
 
 import (
 	"context"
@@ -6,7 +6,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"mongodb-trx/domain_mytrx/model/entity"
-	"mongodb-trx/shared/driver"
+	"mongodb-trx/shared/gogen"
 	"mongodb-trx/shared/infrastructure/config"
 	"mongodb-trx/shared/infrastructure/database"
 	"mongodb-trx/shared/infrastructure/logger"
@@ -17,12 +17,12 @@ type gateway struct {
 	*database.MongoWithTransaction
 
 	log     logger.Logger
-	appData driver.ApplicationData
+	appData gogen.ApplicationData
 	config  *config.Config
 }
 
 // NewGateway ...
-func NewGateway(log logger.Logger, appData driver.ApplicationData, cfg *config.Config) *gateway {
+func NewGateway(log logger.Logger, appData gogen.ApplicationData, cfg *config.Config) *gateway {
 
 	cl := database.NewMongoDefault(cfg)
 

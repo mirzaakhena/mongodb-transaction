@@ -31,7 +31,7 @@ func (r *createOrderInteractor) Execute(ctx context.Context, req InportRequest) 
 
 	res, err = service.WithTransaction(ctx, r.outport, func(ctx context.Context) (*InportResponse, error) {
 
-		order, err := entity.NewOrder("pisang", 12)
+		order, err := entity.NewOrder(req.RandomIDForOrder, "pisang", 12)
 		if err != nil {
 			return nil, err
 		}
@@ -41,7 +41,7 @@ func (r *createOrderInteractor) Execute(ctx context.Context, req InportRequest) 
 			return nil, err
 		}
 
-		person, err := entity.NewPerson("mirza", 28)
+		person, err := entity.NewPerson(req.RandomIDForPerson, "mirza", 28)
 		if err != nil {
 			return nil, err
 		}

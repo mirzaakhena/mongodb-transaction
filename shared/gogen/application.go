@@ -1,19 +1,12 @@
-package driver
+package gogen
 
-import "time"
+import (
+	"mongodb-trx/shared/util"
+	"time"
+)
 
-type Controller interface {
-	RegisterRouter()
-}
-
-type RegistryContract interface {
-	RunApplication()
-}
-
-func Run(rv RegistryContract) {
-	if rv != nil {
-		rv.RunApplication()
-	}
+type Runner interface {
+	Run() error
 }
 
 type ApplicationData struct {
@@ -22,7 +15,8 @@ type ApplicationData struct {
 	StartTime     string `json:"startTime"`
 }
 
-func NewApplicationData(appName, appInstanceID string) ApplicationData {
+func NewApplicationData(appName string) ApplicationData {
+	appInstanceID := util.GenerateID(4)
 	return ApplicationData{
 		AppName:       appName,
 		AppInstanceID: appInstanceID,
