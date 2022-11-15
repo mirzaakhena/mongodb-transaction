@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	"mongodb-trx/domain_belajar/model/entity"
+	"mongodb-trx/domain_mytrx/model/entity"
 )
 
 type SaveOrderRepo interface {

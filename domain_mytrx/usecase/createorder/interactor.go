@@ -2,7 +2,7 @@ package createorder
 
 import (
 	"context"
-	"mongodb-trx/domain_belajar/model/entity"
+	"mongodb-trx/domain_mytrx/model/entity"
 	"mongodb-trx/shared/model/service"
 )
 

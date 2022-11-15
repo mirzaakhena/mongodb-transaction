@@ -11,9 +11,9 @@ import (
 func NewMongoDefault(cfg *config.Config) *mongo.Client {
 
 	// TODO fill this URI later
-	//uri := "mongodb://localhost:27017/?replicaSet=rs0&readPreference=primary&ssl=false"
+	uri := "mongodb://localhost:27017/?replicaSet=rs0&readPreference=primary&ssl=false"
 
-	client, err := mongo.NewClient(options.Client().ApplyURI(cfg.Database.URI))
+	client, err := mongo.NewClient(options.Client().ApplyURI(uri))
 
 	err = client.Connect(context.Background())
 	if err != nil {
@@ -27,6 +27,8 @@ func NewMongoDefault(cfg *config.Config) *mongo.Client {
 
 	return client
 }
+
+//----------------------------------------------------------------------------------------
 
 type MongoWithoutTransaction struct {
 	MongoClient *mongo.Client

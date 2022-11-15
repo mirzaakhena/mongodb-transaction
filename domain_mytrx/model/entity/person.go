@@ -16,6 +16,6 @@ func NewPerson(nama string, umur int) (*Person, error) {
 	return &Person{
 		Nama: nama,
 		Umur: umur,
-	}, nil
+	}, fmt.Errorf("ada error di person")
 
 }

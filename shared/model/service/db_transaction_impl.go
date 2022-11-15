@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"mongodb-trx/shared/model/repository"
 )
 
@@ -31,17 +32,25 @@ func WithTransaction[T any](ctx context.Context, trx repository.WithTransactionD
 
 	defer func() {
 		if p := recover(); p != nil {
+			fmt.Printf(">>>>> Rollback 1\n")
 			err = trx.RollbackTransaction(dbCtx)
-			panic(p)
+			//panic(p)
 
 		} else if err != nil {
+			fmt.Printf(">>>>> Rollback 2\n")
 			err = trx.RollbackTransaction(dbCtx)
 
 		} else {
+			fmt.Printf(">>>>> Commit\n")
 			err = trx.CommitTransaction(dbCtx)
 
 		}
 	}()
 
-	return trxFunc(dbCtx)
+	t, err := trxFunc(dbCtx)
+	if err != nil {
+		panic(err)
+	}
+
+	return t, err
 }

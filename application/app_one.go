@@ -1,9 +1,9 @@
 package application
 
 import (
-	"mongodb-trx/domain_belajar/controller/restapi"
-	"mongodb-trx/domain_belajar/gateway/prod"
-	"mongodb-trx/domain_belajar/usecase/createorder"
+	"mongodb-trx/domain_mytrx/controller/restapi"
+	"mongodb-trx/domain_mytrx/gateway/prod"
+	"mongodb-trx/domain_mytrx/usecase/createorder"
 	"mongodb-trx/shared/driver"
 	"mongodb-trx/shared/infrastructure/config"
 	"mongodb-trx/shared/infrastructure/logger"

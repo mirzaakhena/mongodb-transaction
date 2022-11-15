@@ -2,9 +2,10 @@ package prod
 
 import (
 	"context"
+	"fmt"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
-	"mongodb-trx/domain_belajar/model/entity"
+	"mongodb-trx/domain_mytrx/model/entity"
 	"mongodb-trx/shared/driver"
 	"mongodb-trx/shared/infrastructure/config"
 	"mongodb-trx/shared/infrastructure/database"
@@ -71,7 +72,7 @@ func createCollection(coll *mongo.Collection, db *mongo.Database) {
 }
 
 func (r *gateway) SaveOrder(ctx context.Context, obj *entity.Order) error {
-	r.log.Info(ctx, "called")
+	r.log.Info(ctx, "called SaveOrder")
 
 	coll := r.MongoClient.Database("cobadb").Collection("order")
 
@@ -81,13 +82,13 @@ func (r *gateway) SaveOrder(ctx context.Context, obj *entity.Order) error {
 		return err
 	}
 
-	r.log.Info(ctx, "%v", res.InsertedID)
+	r.log.Info(ctx, "Order %v Inserted", res.InsertedID)
 
 	return nil
 }
 
 func (r *gateway) SavePerson(ctx context.Context, obj *entity.Person) error {
-	r.log.Info(ctx, "called")
+	r.log.Info(ctx, "called SavePerson")
 
 	coll := r.MongoClient.Database("cobadb").Collection("person")
 
@@ -97,7 +98,8 @@ func (r *gateway) SavePerson(ctx context.Context, obj *entity.Person) error {
 		return err
 	}
 
-	r.log.Info(ctx, "%v", res.InsertedID)
+	r.log.Info(ctx, "Person %v Inserted", res.InsertedID)
 
-	return nil
+	//return nil
+	return fmt.Errorf("Uppss")
 }
