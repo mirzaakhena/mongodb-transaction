@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+
+  mongodbapp:
+    container_name: mongodbapp
+    build: .
+    entrypoint: "./mongodb-trx appone"
+    ports:
+      - "8080:8080"
+

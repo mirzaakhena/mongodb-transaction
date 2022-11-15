@@ -21,16 +21,16 @@ type gateway struct {
 }
 
 // NewGateway ...
-func NewGateway(log logger.Logger, appData driver.ApplicationData, config *config.Config) *gateway {
+func NewGateway(log logger.Logger, appData driver.ApplicationData, cfg *config.Config) *gateway {
 
-	cl := database.NewMongoDefault()
+	cl := database.NewMongoDefault(cfg)
 
 	prepareCollection(cl)
 
 	return &gateway{
 		log:                  log,
 		appData:              appData,
-		config:               config,
+		config:               cfg,
 		MongoWithTransaction: database.NewMongoWithTransaction(cl),
 	}
 }

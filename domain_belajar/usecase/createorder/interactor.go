@@ -29,29 +29,29 @@ func (r *createOrderInteractor) Execute(ctx context.Context, req InportRequest) 
 
 	res := &InportResponse{}
 
-	err = service.WithTransaction(ctx, r.outport, func(dbCtx context.Context) error {
+	res, err = service.WithTransaction(ctx, r.outport, func(ctx context.Context) (*InportResponse, error) {
 
 		order, err := entity.NewOrder("pisang", 12)
 		if err != nil {
-			return err
+			return nil, err
 		}
 
-		err = r.outport.SaveOrder(dbCtx, order)
+		err = r.outport.SaveOrder(ctx, order)
 		if err != nil {
-			return err
+			return nil, err
 		}
 
 		person, err := entity.NewPerson("mirza", 28)
 		if err != nil {
-			return err
+			return nil, err
 		}
 
 		err = r.outport.SavePerson(ctx, person)
 		if err != nil {
-			return err
+			return nil, err
 		}
 
-		return nil
+		return res, nil
 	})
 	if err != nil {
 		return nil, err

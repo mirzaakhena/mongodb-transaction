@@ -11,24 +11,24 @@ import (
 	"mongodb-trx/shared/infrastructure/util"
 )
 
-type mirza struct {
+type appOne struct {
 	httpHandler *server.GinHTTPHandler
 	controller  driver.Controller
 }
 
-func (c mirza) RunApplication() {
+func (c appOne) RunApplication() {
 	c.controller.RegisterRouter()
 	c.httpHandler.RunApplication()
 }
 
-func NewMirza() func() driver.RegistryContract {
+func NewAppOne() func() driver.RegistryContract {
 	return func() driver.RegistryContract {
 
 		cfg := config.ReadConfig()
 
 		appID := util.GenerateID(4)
 
-		appData := driver.NewApplicationData("mirza", appID)
+		appData := driver.NewApplicationData("appOne", appID)
 
 		log := logger.NewSimpleJSONLogger(appData)
 
@@ -36,7 +36,7 @@ func NewMirza() func() driver.RegistryContract {
 
 		datasource := prod.NewGateway(log, appData, cfg)
 
-		return &mirza{
+		return &appOne{
 			httpHandler: &httpHandler,
 			controller: &restapi.Controller{
 				Log:               log,

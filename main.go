@@ -9,7 +9,7 @@ import (
 
 func main() {
 	appMap := map[string]func() driver.RegistryContract{
-		"mirza": application.NewMirza(),
+		"appone": application.NewAppOne(),
 	}
 	flag.Parse()
 

@@ -8,7 +8,7 @@ import (
 	"mongodb-trx/shared/infrastructure/config"
 )
 
-func NewMongoDefault(cfg config.Config) *mongo.Client {
+func NewMongoDefault(cfg *config.Config) *mongo.Client {
 
 	// TODO fill this URI later
 	//uri := "mongodb://localhost:27017/?replicaSet=rs0&readPreference=primary&ssl=false"
