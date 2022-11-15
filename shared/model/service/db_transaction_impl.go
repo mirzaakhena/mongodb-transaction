@@ -32,24 +32,25 @@ func WithTransaction[T any](ctx context.Context, trx repository.WithTransactionD
 
 	defer func() {
 		if p := recover(); p != nil {
-			fmt.Printf(">>>>> Rollback 1\n")
+			fmt.Printf(">>>>> Rollback panic\n")
 			err = trx.RollbackTransaction(dbCtx)
-			//panic(p)
+			panic(p)
 
 		} else if err != nil {
-			fmt.Printf(">>>>> Rollback 2\n")
+			fmt.Printf(">>>>> Rollback error\n")
 			err = trx.RollbackTransaction(dbCtx)
 
 		} else {
-			fmt.Printf(">>>>> Commit\n")
+			fmt.Printf(">>>>> Commit normal\n")
 			err = trx.CommitTransaction(dbCtx)
 
 		}
 	}()
 
-	t, err := trxFunc(dbCtx)
+	var t *T
+	t, err = trxFunc(dbCtx)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	return t, err

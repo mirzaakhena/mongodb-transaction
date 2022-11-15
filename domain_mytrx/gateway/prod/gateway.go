@@ -2,6 +2,7 @@ package prod
 
 import (
 	"context"
+	"fmt"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"mongodb-trx/domain_mytrx/model/entity"
@@ -101,7 +102,7 @@ func (r *gateway) SavePerson(ctx context.Context, obj *entity.Person) error {
 
 	r.log.Info(ctx, "Person %v Inserted", res.InsertedID)
 
-	return nil
+	//return nil
 
-	//return fmt.Errorf("Error spot for SavePerson")
+	return fmt.Errorf("Error spot for SavePerson")
 }

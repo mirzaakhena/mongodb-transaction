@@ -13,11 +13,11 @@ func NewPerson(nama string, umur int) (*Person, error) {
 		return nil, fmt.Errorf("umur gak boleh 0 atau dibawah nol")
 	}
 
-	return &Person{
-		Nama: nama,
-		Umur: umur,
-	}, nil
+	//return &Person{
+	//	Nama: nama,
+	//	Umur: umur,
+	//}, nil
 
-	//return nil, fmt.Errorf("Error spot for NewPerson")
+	return nil, fmt.Errorf("Error spot for NewPerson")
 
 }
